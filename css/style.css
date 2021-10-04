@@ -1,6 +1,32 @@
 *{
     color: aliceblue;
+    
 }
+
+
 body {
     background-color: #333;
+}
+
+.cell {
+    height: 40px;
+    width: 40px;
+    background-color: lightgray;
+    text-align: center;
+    cursor: pointer;
+}
+
+.timer{
+    height: 30px;
+    width: 100px;
+    border: 1px solid wheat;
+    font-size: 1.5em;
+}
+
+.btn-box {
+    margin: 10px;
+}
+
+.btn {
+    color: teal;
 }
