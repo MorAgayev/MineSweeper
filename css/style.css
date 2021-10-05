@@ -1,32 +1,146 @@
 *{
     color: aliceblue;
-    
 }
 
 
 body {
     background-color: #333;
+    text-align: center;
+}
+
+.board {
+    position: relative;
+    margin: auto;
+    display: flex;
+    height: 288px;
+    width: 288px;
+    border: 2px solid black;
+}
+
+.hint-box{
+    position: relative;
+    margin: 10px auto;
+    height: 40px;
+    width: 288px;
+    border: 2px solid black;
+   
+    
 }
 
 .cell {
-    height: 40px;
-    width: 40px;
+    width: 72px;
     background-color: lightgray;
     text-align: center;
     cursor: pointer;
 }
 
-.timer{
-    height: 30px;
-    width: 100px;
-    border: 1px solid wheat;
+.cell4 {
+    width: 72px;
+    height: 72px;
+    background-color: lightgray;
+    text-align: center;
+    cursor: pointer;
+}
+.cell8 {
+    width: 36px;
+    height: 36px;
+    background-color: lightgray;
+    text-align: center;
+    cursor: pointer;
+}
+.cell4 {
+    width: 24px;
+    height: 24px;
+    background-color: lightgray;
+    text-align: center;
+    cursor: pointer;
+}
+
+.timer-box{
+    position: relative;
+    margin: 10px auto;
+    box-sizing: border-box;
+    width: 288px;
+    height: 40px;
     font-size: 1.5em;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.timer {
+    position: relative;
+    width: 100px;
+    top: 5px;
+}
+
+.smile {
+    position: relative;
+    width: 100px;
+    cursor: pointer;
+}
+
+.lives {
+    position: relative;
+    width: 100px;
+    top: 5px;
+    font-size: 20px;
+    
 }
 
 .btn-box {
-    margin: 10px;
+    padding: 10px;
+    
 }
-
 .btn {
     color: teal;
+    cursor: pointer;
 }
+
+.hint { 
+    cursor: pointer;
+    font-size: 23px;
+    margin: auto 34px;
+}
+.hint-shadow {
+    text-shadow: 2px 2px 2px  yellow;
+}
+
+.cell-color {
+    background-color: rgb(99, 86, 86);
+}
+
+.safe-cell {
+    background-color: red;
+}
+
+.Bottom-container {
+    position: relative;
+    margin: auto;
+    border: 2px solid black;
+    width: 288px;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+
+}
+.safe-click{
+    color: cadetblue;
+    padding: 5px 25px;
+    cursor: pointer;
+}
+
+.safe-remainder {
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+.win-lose {
+    position: relative;
+    margin: 10px auto;
+    width: 288px;
+    height: 30px;
+}
+
+
