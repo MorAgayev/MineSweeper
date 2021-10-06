@@ -1,20 +1,86 @@
 *{
     color: aliceblue;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
 }
 
 
 body {
     background-color: #333;
+    background-image: url(/img/bgi1.jpg);
+    background-size: cover;
     text-align: center;
+
 }
 
-.board {
+h1 {
+    font-size: 2em;
+    letter-spacing: 0.2em;
+    text-shadow: 2px 2px 18px rgb(87, 115, 192);
     position: relative;
-    margin: auto;
+    animation-name: head;
+    animation-duration: 2.5s;
+}
+
+
+
+.main-container {
     display: flex;
-    height: 288px;
-    width: 288px;
-    border: 2px solid black;
+    justify-content: center;
+    
+}
+
+/*  */
+.board {
+    margin-left: 30px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    animation-name: board;
+    animation-duration: 3s;
+}
+
+.cell4 {
+    width: 72px;
+    height: 72px;
+    background-color: lightgray;
+    text-align: center;
+    cursor: pointer;
+}
+
+.cell8 {
+    width: 36px;
+    height: 36px;
+    background-color: lightgray;
+    text-align: center;
+    cursor: pointer;
+}
+
+.cell12 {
+    width: 24px;
+    height: 24px;
+    background-color: lightgray;
+    text-align: center;
+    cursor: pointer;
+}
+/*  */
+
+.right-container {
+    width: 100px;
+    height: 300px;
+    margin-left: 30px;
+    padding: 110px 0;
+    position: relative;
+    animation-name: side-btn;
+    animation-duration: 2.5s;
+}
+.left-container {
+    width: 100px;
+    height: 300px;
+    padding: 110px 0;
+    position: relative;
+    animation-name: side-btn;
+    animation-duration: 2.5s;
 }
 
 .hint-box{
@@ -27,35 +93,6 @@ body {
     
 }
 
-.cell {
-    width: 72px;
-    background-color: lightgray;
-    text-align: center;
-    cursor: pointer;
-}
-
-.cell4 {
-    width: 72px;
-    height: 72px;
-    background-color: lightgray;
-    text-align: center;
-    cursor: pointer;
-}
-.cell8 {
-    width: 36px;
-    height: 36px;
-    background-color: lightgray;
-    text-align: center;
-    cursor: pointer;
-}
-.cell4 {
-    width: 24px;
-    height: 24px;
-    background-color: lightgray;
-    text-align: center;
-    cursor: pointer;
-}
-
 .timer-box{
     position: relative;
     margin: 10px auto;
@@ -63,10 +100,11 @@ body {
     width: 288px;
     height: 40px;
     font-size: 1.5em;
-    border: 2px solid black;
+    opacity: 90%;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
+    animation-name: board;
+    animation-duration: 3s;
 }
 
 .timer {
@@ -91,11 +129,25 @@ body {
 
 .btn-box {
     padding: 10px;
-    
+    position: relative;
+    animation-name: levelbtn;
+    animation-duration: 2.5s;
 }
 .btn {
     color: teal;
+    width: 65px;
+    height: 25px;
+    border-radius: 30px;
+    margin: auto 10px;
     cursor: pointer;
+}
+
+.btn-label {
+    margin: 15px auto 5px;
+    text-shadow: 2px 2px 18px rgb(87, 115, 192);
+    position: relative;
+    animation-name: head;
+    animation-duration: 1s;
 }
 
 .hint { 
@@ -127,7 +179,10 @@ body {
 }
 .safe-click{
     color: cadetblue;
-    padding: 5px 25px;
+    height: 75px;
+    width: 75px;
+    border-radius: 50px;
+    font-size: 15px;
     cursor: pointer;
 }
 
@@ -136,11 +191,64 @@ body {
     margin-top: 2px;
 }
 
-.win-lose {
-    position: relative;
-    margin: 10px auto;
-    width: 288px;
-    height: 30px;
+.win-lose-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: var(--black);
+    cursor: pointer;
+    visibility:hidden;
+}
+
+.win-lose-content {
+    margin: 10px;
+    color: #333;
+    background-color: #333;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    opacity: 0.9;
+}
+
+.win-lose-text {
+    margin-top: 70px;
+    margin-bottom: 15px;
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.win-lose-restart-btn {
+    background-color: #4073b6;
+    height: 35px;
+    width: 100px;
+    border-radius: 50px;
+    cursor: pointer;
 }
 
 
+/* key animation */
+@keyframes head {
+    0% {top: -150px}
+    100% {top: 0px;}
+}
+
+@keyframes levelbtn {
+    0% {left: -800px}
+    100% {left: 0px}
+}
+
+@keyframes board {
+    0% {opacity: 0;}
+    100% {opacity: 0.9}
+}
+
+@keyframes side-btn {
+    0% {top: -400px}
+    100% {top: 0px;}
+}

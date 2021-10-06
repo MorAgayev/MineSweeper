@@ -76,7 +76,7 @@ function renderBoard(gBoard) {
     for (var i = 0; i < gBoard.length; i++) {
         strHTML += '<tr>'
         for (var j = 0; j < gBoard[0].length; j++) {
-            var className = `cell cell${i}-${j}`;
+            var className = `cell${gBoard.length} cell${i}-${j}`;
             strHTML += `<td onMousedown = "cellClicked(event,this, ${i},${j})" class = "${className}"></td>`
         }
         strHTML += '</tr>'
@@ -126,18 +126,18 @@ function cellClicked(ev, elCell, i, j) {
         if (cell.isMarked) return;
         renderCell(cell, elCell);
         expandShown(gBoard, elCell, i, j);
+        checkGameOver(1,elCell);
         if (gIsHint) {
             showNegs(i, j);
 
         }
 
     } else if (ev.which === 3) {
-        window.addEventListener('contextmenu', function (e) {
             cellMarked(elCell, cell);
-            e.preventDefault();
-        }, false);
+            checkGameOver(3,elCell);
+            ev.preventDefault();
     }
-    checkGameOver(elCell);
+   
 }
 
 function locateMines(board, cell, num) {
@@ -154,21 +154,25 @@ function locateMines(board, cell, num) {
 
 function cellMarked(elCell, cell) {
     if (elCell.innerHTML === FLAG) {
-        cell.isMarked = false;
+        console.log('1');
         gGame.markedCount--;
         elCell.innerHTML = '';
-    } else {
-        cell.isMarked = true;
+        cell.isMarked = false;
+    } else if (elCell.innerHTML !== FLAG) {
+        console.log('2');
         gGame.markedCount++
         elCell.innerHTML = FLAG;
+        cell.isMarked = true;
     }
+   
 }
 
-function checkGameOver(elCell) {
+function checkGameOver( num , elCell) {
     var shownCells = (gLevel.SIZE ** 2) - gLevel.MINES;
     var markedCells = gLevel.MINES;
-    var elWinLose = document.querySelector(`.win-lose`);
-    if (elCell.innerHTML === BOOM) {
+    var elWinLose = document.querySelector(`.win-lose-text`);
+    var elModal = document.querySelector('.win-lose-modal');
+    if (elCell.innerHTML === BOOM && num === 1) {
         gGame.lives--;
         renderLives();
         if (gGame.lives > 0) return
@@ -177,14 +181,17 @@ function checkGameOver(elCell) {
             var elSmile = document.querySelector('.smile');
             elSmile.innerText = LOSE_EMOJI;
             elWinLose.innerText = 'NEXT TIME...'
+            elModal.style.visibility = 'visible';
             clearInterval(gTimerInterval);
         }
     }
-
+   
+    
     if (gGame.shownCount > shownCells && gGame.markedCount === markedCells) {
         var elSmile = document.querySelector('.smile');
         elSmile.innerText = WIN_EMOJI;
         elWinLose.innerText = 'WINNER!!'
+        elModal.style.visibility = 'visible';
         clearInterval(gTimerInterval);
     }
 
@@ -225,10 +232,9 @@ function resetGame() {
     clearInterval(gTimerInterval);
     var elTimer = document.querySelector(`.timer`);
     elTimer.innerText = '00:00';
-    var elSmile = document.querySelector('.smile');
-    elSmile.innerText = DEFAULT_SMILE;
-    var elWinLose = document.querySelector(`.win-lose`);
-    elWinLose.innerText = 'PLAY'
+    var elModal = document.querySelector('.win-lose-modal');
+    elModal.style.visibility = 'hidden';
+
     init();
 }
 
@@ -251,7 +257,6 @@ function findSafeCells() {
         }
     }
     shuffle(safeCells)
-    console.log(safeCells);
     return safeCells;
 }
 
@@ -261,7 +266,8 @@ function safeClick() {
     var cells = findSafeCells()
     var safeCell = cells.pop();
     var elCell = document.querySelector(`.cell${safeCell.i}-${safeCell.j}`);
-    console.log('elCell', elCell);
+    var elCellCount = document.querySelector('.safe-remainder');
+    elCellCount. innerHTML = `${gGame.safeClick} clicks available`
     elCell.classList.add('safe-cell');
     setTimeout(function () {
         elCell.classList.remove('safe-cell');

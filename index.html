@@ -9,11 +9,11 @@
     <title>Mine Sweeper</title>
 </head>
 
-<body onload="init()">
+<body onload="init()" oncontextmenu="return false;">
     <h1>Mine Sweeper</h1>
 
+    <p class="btn-label">Choose level</p>
     <div class="btn-box">
-        <label for="btn">Choose level: </label>
         <button onclick="selectLevel(4)" class="btn">4X4</button>
         <button onclick="selectLevel(8)" class="btn">8X8</button>
         <button onclick="selectLevel(12)" class="btn">12X12</button>
@@ -25,14 +25,26 @@
         <div class="lives"></div>
     </div>
 
+    <div class="main-container">
+        <div class="left-container">
+            <button onclick="safeClick()" class="safe-click">SAFE</button>
+            <p class="safe-remainder">3 clicks available</p>
+           
+        </div>
+        <div class="board"></div>
 
-    <div class="board"></div>
-    <div class="win-lose">PLAY</div>
+        <div class="right-container">
+            <button onclick="addMinesMult7()" class="safe-click">7BOOM!</button>
+        </div>
+    </div>
 
-    <button onclick="safeClick()" class="safe-click">safe</button>
-    <p class="safe-remainder">3 clicks available</p>
-  
-    <button onclick="addMinesMult7()" class="safe-click">7BOOM!</button>
+    <div class="win-lose-modal">
+        <div class="win-lose-content">
+            <div class="win-lose-text">PLAY</div>
+            <button class="win-lose-restart-btn" onclick="resetGame()">Play again</button>
+        </div>
+    </div>
+    
 
     <script src="js/main1.js"></script>
     <script src="js/utils.js"></script>
